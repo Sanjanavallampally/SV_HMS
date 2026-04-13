@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        .card:active {
+            transform: translateY(-8px);
+        }
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .card-icon.patients { color: #FF6B6B; }
+        .card-icon.doctors { color: #4ECDC4; }
+        .card-icon.appointment { color: #FFE66D; }
+        .card-icon.logout { color: #A8E6CF; }
+        
+        .card h2 {
+            font-size: 1.6rem;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .card p {
+            color: #718096;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .card-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Hospital Management</h1>
+            <p>Welcome back! Manage your healthcare operations efficiently</p>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="window.location='/patients/'">
+                <span class="card-icon patients">👥</span>
+                <h2>Patients</h2>
+                <p>View and manage patient records and information</p>
+                <div class="card-badge">View All</div>
+            </div>
+            <div class="card" onclick="window.location='/doctors/'">
+                <span class="card-icon doctors">👨‍⚕️</span>
+                <h2>Doctors</h2>
+                <p>Access doctor profiles and availability</p>
+                <div class="card-badge">Browse</div>
+            </div>
+            <div class="card" onclick="window.location ='/appointments/'">
+                <span class="card-icon appointment">📅</span>
+                <h2>Appointment</h2>
+                <p>Schedule and manage appointments</p>
+                <div class="card-badge">Check Your schedule</div>
+            </div>
+            <div class="card" onclick="window.location='/curelink chatbot/'">
+                <span class="card-icon Care bot">👨‍⚕️</span>
+                <h2>Care Bot</h2>
+                <p>Get help with your healthcare queries</p>
+                <div class="card-badge">Chat Now</div>
+            </div>
+            <div class="card" onclick="window.location='/logout/'">
+                <span class="card-icon logout">🚪</span>
+                <h2>Logout</h2>
+                <p>Sign out from your account</p>
+                <div class="card-badge">Exit</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

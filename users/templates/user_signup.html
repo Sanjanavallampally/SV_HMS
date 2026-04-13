@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Hospital Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 18%),
+                        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.12), transparent 20%),
+                        linear-gradient(135deg, #4f46e5 0%, #2563eb 45%, #7c3aed 100%);
+            color: #111827;
+            padding: 24px;
+        }
+        .hero-shell {
+            width: min(980px, 100%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 32px;
+            box-shadow: 0 32px 90px rgba(15, 23, 42, 0.22);
+            overflow: hidden;
+            backdrop-filter: blur(18px);
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            min-height: 560px;
+        }
+        .hero-info,
+        .hero-form {
+            position: relative;
+            padding: 48px;
+        }
+        .hero-info {
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.16), transparent 26%),
+                        linear-gradient(180deg, rgba(255,255,255,0.08), transparent 80%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero-info h1 {
+            font-size: clamp(2.4rem, 3vw, 3.4rem);
+            line-height: 1.02;
+            color: white;
+            margin-bottom: 18px;
+        }
+        .hero-info p {
+            max-width: 520px;
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 30px;
+        }
+        .hero-list {
+            display: grid;
+            gap: 16px;
+        }
+        .hero-list li {
+            list-style: none;
+            color: #eef2ff;
+            font-size: 1rem;
+            line-height: 1.6;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .hero-list li::before {
+            content: '✔';
+            color: #a5b4fc;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        .hero-form {
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid rgba(15, 23, 42, 0.05);
+        }
+        .hero-form-inner {
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .hero-form h2 {
+            font-size: 2rem;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+        .hero-form p.description {
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.75;
+        }
+        .form-note {
+            margin-bottom: 24px;
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            background: #eef2ff;
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        .alert {
+            margin-bottom: 22px;
+            padding: 14px 16px;
+            background: #fee2e2;
+            color: #9b1c1c;
+            border-radius: 16px;
+            border: 1px solid #fecaca;
+            font-size: 0.95rem;
+        }
+        .hero-form form {
+            display: grid;
+            gap: 18px;
+        }
+        .field-group {
+            display: grid;
+            gap: 10px;
+        }
+        .field-group label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #334155;
+        }
+        .field-group input {
+            width: 100%;
+            padding: 16px 18px;
+            border-radius: 18px;
+            border: 1px solid #d1d5db;
+            background: #f8fafc;
+            color: #0f172a;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .field-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.12);
+            background: #ffffff;
+        }
+        .hero-form button {
+            padding: 16px 18px;
+            border: none;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hero-form button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 40px rgba(59, 130, 246, 0.24);
+        }
+        .footer-text {
+            margin-top: 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        .footer-text a {
+            color: #4338ca;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        @media (max-width: 860px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-form {
+                border-left: none;
+                border-top: 1px solid rgba(15, 23, 42, 0.08);
+            }
+        }
+        @media (max-width: 560px) {
+            .hero-shell {
+                border-radius: 24px;
+            }
+            .hero-info,
+            .hero-form {
+                padding: 32px 24px;
+            }
+            .hero-form-inner {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-shell">
+        <div class="hero-grid">
+            <div class="hero-info">
+                <h1>Start managing your hospital with confidence.</h1>
+                <p>Sign up once and get instant access to your hospital dashboard, patient tracking, doctor schedules, and appointment management.</p>
+                <ul class="hero-list">
+                    <li>Secure account creation with instant access.</li>
+                    <li>Track patients and doctors from one dashboard.</li>
+                    <li>Receive OTP verification on your mobile phone.</li>
+                </ul>
+            </div>
+            <div class="hero-form">
+                <div class="hero-form-inner">
+                    <h2>Create your account</h2>
+                    <p class="description">Enter your details below to create a hospital dashboard account.</p>
+
+                    {% if error %}
+                        <p class="alert">{{ error }}</p>
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field-group">
+                            <label for="username">Username</label>
+                            <input id="username" type="text" name="username" placeholder="Choose a username" autocomplete="username" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="email">Email address</label>
+                            <input id="email" type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="phone">Mobile number</label>
+                            <input id="phone" type="tel" name="phone" placeholder="Enter your phone number" autocomplete="tel" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="password">Password</label>
+                            <input id="password" type="password" name="password" placeholder="Create a password" autocomplete="new-password" required>
+                        </div>
+                        <button type="submit">Create account</button>
+                    </form>
+
+                    <p class="footer-text">Already have an account? <a href="/login/">Login here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

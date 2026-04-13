@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: none;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .align-items {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Appointments</h1>
+
+        <div class="align-items">
+        <div class="mb-3">
+            <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+         <div class="mb-3">
+            <a href="/appointments/create" class="btn btn-primary">+ Create Appointment</a>
+        </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Doctor Name</th>
+                            <th>Patient Name</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in appointments %}
+                        <tr>
+                            <td>{{ a.id }}</td>
+                            <td>{{ a.doctor.name }}</td>
+                            <td>{{ a.patient.name }}</td>
+                            <td>{{ a.appointment_time }}</td>
+                            <td>{{ a.appointment_status }}</td>
+                            <td>
+                                <a href="/appointments/{{ a.id }}/edit" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="/appointments/{{ a.id }}/delete" class="btn btn-sm btn-danger ms-2">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

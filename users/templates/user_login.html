@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Hospital Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1f2937;
+        }
+        .page-shell {
+            width: min(480px, calc(100% - 32px));
+            margin: 24px;
+            padding: 32px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .page-shell .brand {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+        .page-shell .brand h1 {
+            font-size: 2.1rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        .page-shell .brand p {
+            color: #475569;
+            font-size: 1rem;
+        }
+        .login-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px 28px 26px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+            border: 1px solid rgba(102, 126, 234, 0.18);
+        }
+        .login-card h2 {
+            font-size: 1.65rem;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+        .login-card p.description {
+            margin-bottom: 24px;
+            color: #64748b;
+            line-height: 1.7;
+        }
+        .alert {
+            margin: 0 0 20px;
+            padding: 14px 16px;
+            background: #fee2e2;
+            color: #9b1c1c;
+            border-radius: 16px;
+            border: 1px solid #fecaca;
+            font-size: 0.95rem;
+        }
+        .login-card form {
+            display: grid;
+            gap: 18px;
+        }
+        .field-group {
+            display: grid;
+            gap: 8px;
+        }
+        .field-group label {
+            color: #475569;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .field-group input {
+            width: 100%;
+            padding: 15px 16px;
+            border-radius: 16px;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            color: #0f172a;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .field-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 5px rgba(102, 126, 234, 0.12);
+            background: #ffffff;
+        }
+        .login-card button {
+            width: 100%;
+            padding: 16px 18px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .login-card button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(102, 126, 234, 0.25);
+        }
+        .footer-text {
+            margin-top: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        .footer-text a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        @media (max-width: 560px) {
+            .page-shell {
+                padding: 24px;
+            }
+            .login-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="page-shell">
+        <div class="brand">
+            <h1>🏥 Hospital Dashboard</h1>
+            <p>Secure sign in to manage patients, doctors, and appointments.</p>
+        </div>
+
+        <div class="login-card">
+            <h2>Welcome Back</h2>
+            <p class="description">Please use your hospital credentials to login and continue to the dashboard.</p>
+
+            {% if error %}
+                <p class="alert">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="field-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" name="username" placeholder="Enter your username" autocomplete="username" required>
+                </div>
+                <div class="field-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <p class="footer-text">Don’t have an account? <a href="/signup/">Sign up</a> or contact your administrator.</p>
+    </section>
+</body>
+</html>
