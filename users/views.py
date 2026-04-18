@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
-import resend
+from django.core.mail import send_mail
 from django.conf import settings
 
 def signup(request):
@@ -22,6 +22,13 @@ def signup(request):
 
         if not phone.isdigit() or len(phone) < 7:
             return render(request, 'user_signup.html', {'error': 'Enter a valid mobile number.'})
+        send_mail(
+             subject="Hello ,Thank you for signing up to our website",
+             message="your account have been created..",
+             from_email="Curelink<onboarding@resend.dev>",
+             recipient_list= [email],
+             html_message="<strong>Your account has been successfully created!</strong>",
+        )
 
         login(request, user)
         return redirect('/dashboard/')

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from google import genai
 from django.conf import settings
+from appointments.models import Appointment
 from doctors.models import doctor
 from patients.models import Patient
 import markdown_it
@@ -16,18 +17,21 @@ def dashboard_hms_ai(request):
     if request.method == 'POST':
         user_query = request.POST.get('query')
         client = genai.Client(api_key=settings.GEMINI_API_KEY)
-        doctors = Doctor.objects.all()
+        doctors = doctor.objects.all()
         patients = Patient.objects.all()
-
+        appointments = Appointment.objects.all()
         doctors = list(doctors.values())
         patients = list(patients.values())
+        appointments = list(appointments.values())
 
         final_query = f'''
-            You are the AI chatbot inside a website called medhaHMS
+            You are the AI chatbot inside a website called CurelinkHMS
             You responsibility is to answer questions about
-            medhaHMS data. Anything part from this, you are not allowed to
+            CurelinkHMS data. Anything part from this, you are not allowed to
             answer. Below is the doctor data you need to know. 
-            {doctors} and below are patients {patients}
+            {doctors} ,
+            below are patients {patients}
+            and below are appointments {appointments}
 
            Answer below:
             {user_query}

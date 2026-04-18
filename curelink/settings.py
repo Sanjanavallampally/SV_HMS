@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from logging import config
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,7 +47,8 @@ INSTALLED_APPS = [
     'users',
     'dashboard',
     'appointments',
-    'marketing'
+    'marketing',
+    'anymail'
 
 ]
 
@@ -132,6 +137,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login'
 
-#RESEND_API_KEY = config("RESEND_API_KEY")
 
-GEMINI_API_KEY = config("GEMINI_API_KEY")
+RESEND_API_KEY= "re_eV1Puubz_6aBJHU88C7jMYp6Z66uR4y5Q"
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+ANYMAIL = {
+    "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
+}
+DEFAULT_FROM_EMAIL = "onboarding@resend.dev"
+
+
+GEMINI_API_KEY= "AIzaSyDfuB3-HQz0_3esln7rt-nRnqDxhhFppp8"
+
